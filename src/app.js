@@ -1,8 +1,8 @@
-require('dotenv').config();
-const express = require('express');
-const cors = require('cors');
-const path = require('path');
-const authRoutes = require('./routes/authRoutes');
+import 'dotenv/config';
+import express from 'express';
+import cors from 'cors';
+import path from 'path';
+import authRoutes from './routes/authRoutes.js';
 
 const app = express();
 
@@ -16,4 +16,4 @@ app.use(express.json());
 
 app.use('/services', authRoutes);
 
-module.exports = app;
+export default app;
