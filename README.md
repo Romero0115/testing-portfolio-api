@@ -30,7 +30,7 @@ This is a **REST API** built with Node.js and Express. It’s part of my persona
 ## 🌐 Despliegue / Deployment
 🚀 Backend (API): Railway
 🎨 Frontend: Firebase
-🌱 Database: Supabase
+🌱 Database: Railway (PostgreSQL)
 🧪 Tests Automatizados / Automated Tests: Cypress
 
 ------------------------------------------------------------------
