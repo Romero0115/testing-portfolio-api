@@ -1,5 +1,5 @@
-const pool = require('../database.js');
-const bcrypt = require('bcryptjs');
+import sql from '../database.js';
+import bcrypt from 'bcryptjs';
 
 
 
@@ -24,15 +24,17 @@ const login = async (req, res) => {
     const { email, password } = req.body;
 
     try {
-        const result = await pool.query('SELECT * FROM customer WHERE email = $1', [email]);
+        const result = await sql`
+            SELECT * FROM customer WHERE email = ${email}
+        `;
 
-        if (result.rows.length === 0) {
+        if (result.length === 0) {
             return res.status(401).json({
                 toastText: "toastWrongUser"
             });
         }
 
-        const user = result.rows[0];
+        const user = result[0];
 
         const passwordMatch = await bcrypt.compare(password, user.password);
 
@@ -74,18 +76,21 @@ const signup = async (req, res) => {
     }
 
     try {
-        const userCheck = await pool.query('SELECT * FROM customer WHERE email = $1', [normalizedEmail]);
-        if (userCheck.rows.length > 0) {
+        const userCheck = await sql`
+            SELECT * FROM customer WHERE email = ${normalizedEmail}
+        `;
+
+        if (userCheck.length > 0) {
             return res.status(400).json({ toastText: 'toastEmailExists' });
         }
 
         const salt = await bcrypt.genSalt(10);
         const hashedPassword = await bcrypt.hash(password, salt);
 
-        await pool.query(
-            'INSERT INTO customer (name, email, password) VALUES ($1, $2, $3)',
-            [name, normalizedEmail, hashedPassword]
-        );
+        await sql`
+            INSERT INTO customer (name, email, password) 
+            VALUES (${name}, ${normalizedEmail}, ${hashedPassword})
+        `;
 
         return res.status(201).json({ toastText: 'toastSignupSuccess' });
 
@@ -95,6 +100,5 @@ const signup = async (req, res) => {
     }
 };
 
+export { login, signup };
 
-
-module.exports = { login, signup };
