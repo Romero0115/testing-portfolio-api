@@ -39,7 +39,7 @@ This is a **REST API** built with Node.js and Express. It’s part of my persona
 **Matías Romero**
 
 📧 Email: [matiasrome99.psi@gmail.com](mailto:matiasrome99.psi@gmail.com)  
-📱 Teléfono / Phone: +598 98158233  
+📱 Teléfono / Phone: [+598 98158233](https://wa.me/59898158233)  
 🔗 [LinkedIn](https://www.linkedin.com/in/matias-romero-qa-testing/)
 
 ------------------------------------------------------------------
